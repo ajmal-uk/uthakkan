@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Rocket, Menu, X, Home, Info, Briefcase, User, Mail } from 'lucide-react';
+import { Rocket, Menu, X, Home, Info, Briefcase, Package, User, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
@@ -40,6 +40,7 @@ const Navbar = () => {
         { path: '/', label: 'Home', icon: Home },
         { path: '/about', label: 'About', icon: Info },
         { path: '/services', label: 'Services', icon: Briefcase },
+        { path: '/products', label: 'Products', icon: Package },
         { path: '/developer', label: 'Developer', icon: User },
         { path: '/contact', label: 'Contact', icon: Mail },
     ];
@@ -76,8 +77,8 @@ const Navbar = () => {
                                     key={link.path}
                                     to={link.path}
                                     className={`relative px-3 py-2 rounded-lg transition-colors ${isActive(link.path)
-                                            ? 'bg-blue-50 text-blue-600'
-                                            : 'text-gray-600 hover:text-blue-600 hover:bg-gray-50'
+                                        ? 'bg-blue-50 text-blue-600'
+                                        : 'text-gray-600 hover:text-blue-600 hover:bg-gray-50'
                                         }`}
                                 >
                                     <span className="text-sm font-medium">

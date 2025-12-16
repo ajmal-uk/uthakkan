@@ -9,6 +9,7 @@ import './App.css';
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
 const Services = lazy(() => import('./pages/Services'));
+const Products = lazy(() => import('./pages/Products'));
 const Developer = lazy(() => import('./pages/Developer'));
 const Contact = lazy(() => import('./pages/Contact'));
 
@@ -18,6 +19,7 @@ const prefetchRoutes = () => {
     requestIdleCallback(() => {
       import('./pages/About');
       import('./pages/Services');
+      import('./pages/Products');
       import('./pages/Developer');
       import('./pages/Contact');
     });
@@ -98,6 +100,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/services" element={<Services />} />
+                <Route path="/products" element={<Products />} />
                 <Route path="/developer" element={<Developer />} />
                 <Route path="/contact" element={<Contact />} />
               </Routes>
