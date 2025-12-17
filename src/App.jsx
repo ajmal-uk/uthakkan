@@ -1,47 +1,24 @@
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
-import { lazy, Suspense, useEffect, memo, Component } from 'react';
+import { useEffect, memo, Component } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import './App.css';
 
-// Lazy load pages for better performance
-const Home = lazy(() => import('./pages/Home'));
-const About = lazy(() => import('./pages/About'));
-const Services = lazy(() => import('./pages/Services'));
-const Products = lazy(() => import('./pages/Products'));
-const Developer = lazy(() => import('./pages/Developer'));
-const Contact = lazy(() => import('./pages/Contact'));
-
-// Prefetch routes on idle
-const prefetchRoutes = () => {
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(() => {
-      import('./pages/About');
-      import('./pages/Services');
-      import('./pages/Products');
-      import('./pages/Developer');
-      import('./pages/Contact');
-    });
-  }
-};
-
-// Loading fallback - memoized
-const PageLoader = memo(() => (
-  <div className="min-h-screen flex items-center justify-center bg-white">
-    <div className="flex flex-col items-center space-y-3">
-      <div className="w-10 h-10 border-3 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-      <p className="text-gray-400 text-sm">Loading...</p>
-    </div>
-  </div>
-));
+// Direct imports for instant navigation (pages are small enough)
+import Home from './pages/Home';
+import About from './pages/About';
+import Services from './pages/Services';
+import Products from './pages/Products';
+import Developer from './pages/Developer';
+import Contact from './pages/Contact';
 
 // Scroll to top on route change
 const ScrollToTop = memo(() => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }, [pathname]);
 
   return null;
@@ -61,13 +38,13 @@ class ErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="min-h-screen flex items-center justify-center bg-slate-900">
           <div className="text-center p-8">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Oops!</h1>
-            <p className="text-gray-600 mb-6">Something went wrong.</p>
+            <h1 className="text-4xl font-bold text-white mb-4">Oops!</h1>
+            <p className="text-slate-400 mb-6">Something went wrong.</p>
             <button
               onClick={() => window.location.reload()}
-              className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
+              className="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-medium hover:shadow-lg transition-all"
             >
               Refresh
             </button>
@@ -81,30 +58,24 @@ class ErrorBoundary extends Component {
 
 // Memoized Footer
 const MemoizedFooter = memo(Footer);
+const MemoizedNavbar = memo(Navbar);
 
 function App() {
-  // Prefetch routes after initial load
-  useEffect(() => {
-    prefetchRoutes();
-  }, []);
-
   return (
     <ErrorBoundary>
       <Router>
         <div className="flex flex-col min-h-screen">
           <ScrollToTop />
-          <Navbar />
+          <MemoizedNavbar />
           <main className="flex-grow">
-            <Suspense fallback={<PageLoader />}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/services" element={<Services />} />
-                <Route path="/products" element={<Products />} />
-                <Route path="/developer" element={<Developer />} />
-                <Route path="/contact" element={<Contact />} />
-              </Routes>
-            </Suspense>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/developer" element={<Developer />} />
+              <Route path="/contact" element={<Contact />} />
+            </Routes>
           </main>
           <MemoizedFooter />
         </div>
