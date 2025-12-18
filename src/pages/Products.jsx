@@ -3,88 +3,29 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { useRef, useState, useEffect, useCallback } from 'react';
 import SEO from '../components/SEO';
 
-// Interactive Wave Canvas Component - Full Width
+// Lightweight Wave Component - CSS-only (no canvas animation)
 const WaveCanvas = ({ isDark }) => {
-    const canvasRef = useRef(null);
-    const mouseRef = useRef({ x: 0, y: 0 });
-    const animationRef = useRef(null);
-
-    useEffect(() => {
-        const canvas = canvasRef.current;
-        if (!canvas) return;
-
-        const ctx = canvas.getContext('2d');
-        let width = window.innerWidth;
-        let height = 300;
-
-        canvas.width = width;
-        canvas.height = height;
-
-        const waves = [
-            { amplitude: 30, frequency: 0.015, speed: 0.012, phase: 0, color: isDark ? 'rgba(99, 102, 241, 0.4)' : 'rgba(99, 102, 241, 0.2)' },
-            { amplitude: 40, frequency: 0.012, speed: 0.018, phase: 2, color: isDark ? 'rgba(139, 92, 246, 0.35)' : 'rgba(139, 92, 246, 0.15)' },
-            { amplitude: 25, frequency: 0.02, speed: 0.008, phase: 4, color: isDark ? 'rgba(59, 130, 246, 0.3)' : 'rgba(59, 130, 246, 0.12)' },
-            { amplitude: 35, frequency: 0.018, speed: 0.015, phase: 6, color: isDark ? 'rgba(168, 85, 247, 0.25)' : 'rgba(168, 85, 247, 0.1)' },
-        ];
-
-        const handleMouseMove = (e) => {
-            mouseRef.current = { x: e.clientX, y: e.clientY };
-        };
-
-        const handleResize = () => {
-            width = window.innerWidth;
-            canvas.width = width;
-        };
-
-        window.addEventListener('mousemove', handleMouseMove);
-        window.addEventListener('resize', handleResize);
-
-        const animate = () => {
-            ctx.clearRect(0, 0, width, height);
-
-            waves.forEach((wave) => {
-                wave.phase += wave.speed;
-
-                ctx.beginPath();
-                ctx.moveTo(0, height);
-
-                for (let x = 0; x <= width; x += 3) {
-                    const distFromMouse = Math.abs(x - mouseRef.current.x);
-                    const mouseInfluence = Math.max(0, 1 - distFromMouse / 250) * 40;
-
-                    const y = height / 2 + 50 +
-                        Math.sin(x * wave.frequency + wave.phase) * (wave.amplitude + mouseInfluence) +
-                        Math.sin(x * wave.frequency * 0.5 + wave.phase * 1.5) * wave.amplitude * 0.4;
-
-                    ctx.lineTo(x, y);
-                }
-
-                ctx.lineTo(width, height);
-                ctx.closePath();
-                ctx.fillStyle = wave.color;
-                ctx.fill();
-            });
-
-            animationRef.current = requestAnimationFrame(animate);
-        };
-
-        animate();
-
-        return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('resize', handleResize);
-            if (animationRef.current) {
-                cancelAnimationFrame(animationRef.current);
-            }
-        };
-    }, [isDark]);
-
     return (
-        <canvas
-            ref={canvasRef}
-            className="absolute bottom-0 left-0 w-full pointer-events-auto"
-            style={{ height: '300px' }}
-        />
+        <div className="absolute bottom-0 left-0 w-full h-[200px] overflow-hidden pointer-events-none">
+            <svg
+                className="absolute bottom-0 w-full h-full"
+                viewBox="0 0 1440 200"
+                preserveAspectRatio="none"
+            >
+                <path
+                    fill={isDark ? 'rgba(99, 102, 241, 0.15)' : 'rgba(99, 102, 241, 0.08)'}
+                    d="M0,100 C360,150 720,50 1080,100 C1260,125 1380,75 1440,100 L1440,200 L0,200 Z"
+                />
+                <path
+                    fill={isDark ? 'rgba(139, 92, 246, 0.12)' : 'rgba(139, 92, 246, 0.06)'}
+                    d="M0,120 C240,80 480,160 720,120 C960,80 1200,160 1440,120 L1440,200 L0,200 Z"
+                />
+                <path
+                    fill={isDark ? 'rgba(59, 130, 246, 0.1)' : 'rgba(59, 130, 246, 0.05)'}
+                    d="M0,140 C180,180 360,100 540,140 C720,180 900,100 1080,140 C1260,180 1380,100 1440,140 L1440,200 L0,200 Z"
+                />
+            </svg>
+        </div>
     );
 };
 
@@ -95,8 +36,8 @@ const ThemeToggle = ({ isDark, toggleTheme }) => (
         whileHover={{ scale: 1.1, rotate: 15 }}
         whileTap={{ scale: 0.9 }}
         className={`fixed top-24 right-6 z-50 p-3.5 rounded-full shadow-xl backdrop-blur-md border transition-all duration-300 ${isDark
-                ? 'bg-slate-800/90 border-slate-600 text-yellow-400 hover:bg-slate-700'
-                : 'bg-white/90 border-gray-200 text-slate-700 hover:bg-gray-50'
+            ? 'bg-slate-800/90 border-slate-600 text-yellow-400 hover:bg-slate-700'
+            : 'bg-white/90 border-gray-200 text-slate-700 hover:bg-gray-50'
             }`}
     >
         <AnimatePresence mode="wait">
@@ -113,42 +54,23 @@ const ThemeToggle = ({ isDark, toggleTheme }) => (
     </motion.button>
 );
 
-// Floating orbs background
+// Static orbs background - CSS-only (no JavaScript animations)
 const FloatingOrbs = ({ isDark }) => (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-            animate={{
-                scale: [1, 1.4, 1],
-                opacity: [0.4, 0.6, 0.4],
-                x: [0, 60, 0],
-                y: [0, -40, 0]
-            }}
-            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-            className={`absolute top-10 right-[20%] w-[600px] h-[600px] rounded-full filter blur-[180px] ${isDark ? 'bg-violet-600' : 'bg-violet-400'
+        <div
+            className={`absolute top-10 right-[20%] w-[400px] h-[400px] rounded-full filter blur-[120px] ${isDark ? 'bg-violet-600' : 'bg-violet-400'
                 }`}
-            style={{ opacity: isDark ? 0.4 : 0.25 }}
+            style={{ opacity: isDark ? 0.3 : 0.2 }}
         />
-        <motion.div
-            animate={{
-                scale: [1.3, 1, 1.3],
-                opacity: [0.3, 0.5, 0.3],
-                x: [0, -50, 0],
-                y: [0, 40, 0]
-            }}
-            transition={{ duration: 12, repeat: Infinity, delay: 4, ease: "easeInOut" }}
-            className={`absolute bottom-0 left-[15%] w-[500px] h-[500px] rounded-full filter blur-[150px] ${isDark ? 'bg-blue-600' : 'bg-blue-400'
+        <div
+            className={`absolute bottom-0 left-[15%] w-[350px] h-[350px] rounded-full filter blur-[100px] ${isDark ? 'bg-blue-600' : 'bg-blue-400'
                 }`}
-            style={{ opacity: isDark ? 0.35 : 0.2 }}
+            style={{ opacity: isDark ? 0.25 : 0.15 }}
         />
-        <motion.div
-            animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.2, 0.4, 0.2],
-            }}
-            transition={{ duration: 15, repeat: Infinity, delay: 2, ease: "easeInOut" }}
-            className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full filter blur-[200px] ${isDark ? 'bg-emerald-600' : 'bg-emerald-400'
+        <div
+            className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[450px] h-[450px] rounded-full filter blur-[130px] ${isDark ? 'bg-emerald-600' : 'bg-emerald-400'
                 }`}
-            style={{ opacity: isDark ? 0.2 : 0.1 }}
+            style={{ opacity: isDark ? 0.15 : 0.08 }}
         />
     </div>
 );
@@ -190,8 +112,8 @@ const ProductCard = ({ product, index, isDark }) => {
             {/* Card */}
             <motion.div
                 className={`relative rounded-3xl p-8 md:p-10 border shadow-2xl transition-all duration-500 overflow-hidden h-full ${isDark
-                        ? 'bg-slate-800/80 border-slate-700/50 hover:bg-slate-800/95 backdrop-blur-xl'
-                        : 'bg-white/90 border-gray-200/50 hover:bg-white hover:shadow-3xl backdrop-blur-xl'
+                    ? 'bg-slate-800/80 border-slate-700/50 hover:bg-slate-800/95 backdrop-blur-xl'
+                    : 'bg-white/90 border-gray-200/50 hover:bg-white hover:shadow-3xl backdrop-blur-xl'
                     }`}
                 whileHover={{ y: -8, scale: 1.01 }}
                 style={{
@@ -263,8 +185,8 @@ const ProductCard = ({ product, index, isDark }) => {
                                 transition={{ delay: 0.2 + i * 0.08 }}
                                 whileHover={{ scale: 1.05, y: -3 }}
                                 className={`px-4 py-2 text-sm font-medium rounded-xl transition-all cursor-default ${isDark
-                                        ? 'bg-slate-700/60 text-slate-200 hover:bg-slate-700 border border-slate-600/30'
-                                        : 'bg-gray-100 text-gray-700 hover:bg-white hover:shadow-lg border border-gray-200'
+                                    ? 'bg-slate-700/60 text-slate-200 hover:bg-slate-700 border border-slate-600/30'
+                                    : 'bg-gray-100 text-gray-700 hover:bg-white hover:shadow-lg border border-gray-200'
                                     }`}
                             >
                                 {feature}
@@ -414,7 +336,7 @@ const Products = () => {
                 title="UTHAKKAN Products - AI Tools, Developer Utilities & Digital Experiences"
                 description="Discover UTHAKKAN's flagship products: Byte AI chatbot, ToolPix tool studio, Zymail temporary email, and Zyrace online racing game. Free, powerful, and built for everyone."
                 keywords="Byte AI, ToolPix, Zymail, Zyrace, AI chatbot, online tools, temporary email, online games, developer tools, UTHAKKAN products, free AI tools, online compiler"
-                url="https://uthakkan.unaux.com/#/products"
+                url="https://uthakkan.unaux.com/products"
                 schema={productSchema}
             />
 
@@ -432,8 +354,8 @@ const Products = () => {
                 >
                     {/* Background */}
                     <div className={`absolute inset-0 transition-colors duration-500 ${isDark
-                            ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'
-                            : 'bg-gradient-to-br from-gray-50 via-indigo-50/50 to-purple-50/50'
+                        ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'
+                        : 'bg-gradient-to-br from-gray-50 via-indigo-50/50 to-purple-50/50'
                         }`} />
 
                     {/* Floating orbs */}
@@ -457,8 +379,8 @@ const Products = () => {
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             transition={{ duration: 0.6 }}
                             className={`inline-flex items-center px-6 py-3 backdrop-blur-md rounded-full text-sm font-medium mb-10 border shadow-xl ${isDark
-                                    ? 'bg-white/10 text-white/90 border-white/20'
-                                    : 'bg-white/80 text-gray-700 border-gray-200'
+                                ? 'bg-white/10 text-white/90 border-white/20'
+                                : 'bg-white/80 text-gray-700 border-gray-200'
                                 }`}
                         >
                             <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }}>
@@ -515,8 +437,8 @@ const Products = () => {
                                 >
                                     <motion.div
                                         className={`w-14 h-14 rounded-2xl backdrop-blur-sm flex items-center justify-center border transition-all duration-300 ${isDark
-                                                ? 'bg-white/10 border-white/10 group-hover:bg-white/20 group-hover:border-white/30'
-                                                : 'bg-white border-gray-200 group-hover:bg-gray-50 shadow-lg'
+                                            ? 'bg-white/10 border-white/10 group-hover:bg-white/20 group-hover:border-white/30'
+                                            : 'bg-white border-gray-200 group-hover:bg-gray-50 shadow-lg'
                                             }`}
                                         whileHover={{ rotate: [0, -8, 8, 0] }}
                                     >
@@ -542,8 +464,8 @@ const Products = () => {
 
                 {/* Products Grid - Full Width */}
                 <section className={`py-24 md:py-40 relative transition-colors duration-500 ${isDark
-                        ? 'bg-gradient-to-b from-slate-800 via-slate-900 to-slate-800'
-                        : 'bg-gradient-to-b from-white via-gray-50 to-white'
+                    ? 'bg-gradient-to-b from-slate-800 via-slate-900 to-slate-800'
+                    : 'bg-gradient-to-b from-white via-gray-50 to-white'
                     }`}>
                     <div className="w-full px-8 md:px-16 lg:px-24 relative z-10">
                         {/* Section header */}
@@ -580,8 +502,8 @@ const Products = () => {
 
                 {/* Features Section - Full Width */}
                 <section className={`py-24 md:py-32 relative overflow-hidden transition-colors duration-500 ${isDark
-                        ? 'bg-slate-900'
-                        : 'bg-white'
+                    ? 'bg-slate-900'
+                    : 'bg-white'
                     }`}>
                     <div className="w-full px-8 md:px-16 lg:px-24">
                         <motion.div
@@ -611,8 +533,8 @@ const Products = () => {
                                     transition={{ delay: i * 0.1 }}
                                     whileHover={{ y: -10, scale: 1.02 }}
                                     className={`group p-8 rounded-3xl text-center transition-all duration-500 ${isDark
-                                            ? 'bg-slate-800/50 hover:bg-slate-800 border border-slate-700/50'
-                                            : 'bg-gray-50 hover:bg-white hover:shadow-2xl'
+                                        ? 'bg-slate-800/50 hover:bg-slate-800 border border-slate-700/50'
+                                        : 'bg-gray-50 hover:bg-white hover:shadow-2xl'
                                         }`}
                                 >
                                     <motion.div
@@ -635,8 +557,8 @@ const Products = () => {
 
                 {/* Our Promise Section - Full Width */}
                 <section className={`py-24 md:py-40 relative overflow-hidden transition-colors duration-500 ${isDark
-                        ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'
-                        : 'bg-gradient-to-br from-indigo-50 via-white to-purple-50'
+                    ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900'
+                    : 'bg-gradient-to-br from-indigo-50 via-white to-purple-50'
                     }`}>
                     {/* Background glows */}
                     <motion.div
@@ -701,8 +623,8 @@ const Products = () => {
 
                 {/* CTA Section - Full Width */}
                 <section className={`py-24 md:py-40 relative overflow-hidden transition-colors duration-500 ${isDark
-                        ? 'bg-gradient-to-br from-slate-900 via-indigo-900/50 to-slate-900'
-                        : 'bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-700'
+                    ? 'bg-gradient-to-br from-slate-900 via-indigo-900/50 to-slate-900'
+                    : 'bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-700'
                     }`}>
                     {/* Animated circles */}
                     <motion.div animate={{ rotate: 360 }} transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
@@ -740,12 +662,12 @@ const Products = () => {
                             </p>
 
                             <motion.a
-                                href="/#/contact"
+                                href="/contact"
                                 whileHover={{ scale: 1.05, boxShadow: "0 30px 60px -15px rgba(0, 0, 0, 0.5)" }}
                                 whileTap={{ scale: 0.95 }}
                                 className={`relative inline-flex items-center px-12 py-6 font-semibold text-xl rounded-2xl shadow-2xl overflow-hidden ${isDark
-                                        ? 'bg-gradient-to-r from-violet-600 to-indigo-600 text-white'
-                                        : 'bg-white text-indigo-600'
+                                    ? 'bg-gradient-to-r from-violet-600 to-indigo-600 text-white'
+                                    : 'bg-white text-indigo-600'
                                     }`}
                             >
                                 <motion.div

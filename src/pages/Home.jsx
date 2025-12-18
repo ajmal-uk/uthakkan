@@ -4,60 +4,30 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useCallback, useRef, useEffect } from 'react';
 import SEO from '../components/SEO';
 
-// Interactive Wave Canvas
+// Lightweight Wave Component - CSS-only (no canvas animation)
 const WaveCanvas = ({ isDark }) => {
-    const canvasRef = useRef(null);
-    const mouseRef = useRef({ x: 0, y: 0 });
-    const animationRef = useRef(null);
-
-    useEffect(() => {
-        const canvas = canvasRef.current;
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-        let width = window.innerWidth;
-        let height = 250;
-        canvas.width = width;
-        canvas.height = height;
-
-        const waves = [
-            { amplitude: 25, frequency: 0.015, speed: 0.01, phase: 0, color: isDark ? 'rgba(99, 102, 241, 0.35)' : 'rgba(99, 102, 241, 0.15)' },
-            { amplitude: 35, frequency: 0.012, speed: 0.015, phase: 2, color: isDark ? 'rgba(139, 92, 246, 0.3)' : 'rgba(139, 92, 246, 0.12)' },
-            { amplitude: 20, frequency: 0.02, speed: 0.008, phase: 4, color: isDark ? 'rgba(59, 130, 246, 0.25)' : 'rgba(59, 130, 246, 0.1)' },
-        ];
-
-        const handleMouseMove = (e) => { mouseRef.current = { x: e.clientX, y: e.clientY }; };
-        const handleResize = () => { width = window.innerWidth; canvas.width = width; };
-        window.addEventListener('mousemove', handleMouseMove);
-        window.addEventListener('resize', handleResize);
-
-        const animate = () => {
-            ctx.clearRect(0, 0, width, height);
-            waves.forEach((wave) => {
-                wave.phase += wave.speed;
-                ctx.beginPath();
-                ctx.moveTo(0, height);
-                for (let x = 0; x <= width; x += 3) {
-                    const distFromMouse = Math.abs(x - mouseRef.current.x);
-                    const mouseInfluence = Math.max(0, 1 - distFromMouse / 200) * 35;
-                    const y = height / 2 + 40 + Math.sin(x * wave.frequency + wave.phase) * (wave.amplitude + mouseInfluence) + Math.sin(x * wave.frequency * 0.5 + wave.phase * 1.5) * wave.amplitude * 0.4;
-                    ctx.lineTo(x, y);
-                }
-                ctx.lineTo(width, height);
-                ctx.closePath();
-                ctx.fillStyle = wave.color;
-                ctx.fill();
-            });
-            animationRef.current = requestAnimationFrame(animate);
-        };
-        animate();
-        return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('resize', handleResize);
-            if (animationRef.current) cancelAnimationFrame(animationRef.current);
-        };
-    }, [isDark]);
-
-    return <canvas ref={canvasRef} className="absolute bottom-0 left-0 w-full pointer-events-auto" style={{ height: '250px' }} />;
+    return (
+        <div className="absolute bottom-0 left-0 w-full h-[180px] overflow-hidden pointer-events-none">
+            <svg
+                className="absolute bottom-0 w-full h-full"
+                viewBox="0 0 1440 180"
+                preserveAspectRatio="none"
+            >
+                <path
+                    fill={isDark ? 'rgba(99, 102, 241, 0.12)' : 'rgba(99, 102, 241, 0.06)'}
+                    d="M0,90 C360,130 720,50 1080,90 C1260,110 1380,70 1440,90 L1440,180 L0,180 Z"
+                />
+                <path
+                    fill={isDark ? 'rgba(139, 92, 246, 0.1)' : 'rgba(139, 92, 246, 0.05)'}
+                    d="M0,110 C240,70 480,150 720,110 C960,70 1200,150 1440,110 L1440,180 L0,180 Z"
+                />
+                <path
+                    fill={isDark ? 'rgba(59, 130, 246, 0.08)' : 'rgba(59, 130, 246, 0.04)'}
+                    d="M0,130 C180,160 360,100 540,130 C720,160 900,100 1080,130 C1260,160 1380,100 1440,130 L1440,180 L0,180 Z"
+                />
+            </svg>
+        </div>
+    );
 };
 
 // Theme toggle
@@ -110,15 +80,12 @@ const Home = () => {
                 <section className="relative min-h-[95vh] flex items-center justify-center overflow-hidden">
                     <div className={`absolute inset-0 transition-colors duration-500 ${isDark ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900' : 'bg-gradient-to-br from-gray-50 via-indigo-50/50 to-purple-50/50'}`} />
 
-                    {/* Floating orbs */}
-                    <motion.div animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.5, 0.3], x: [0, 50, 0], y: [0, -30, 0] }} transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-                        className={`absolute top-20 right-[15%] w-[600px] h-[600px] rounded-full filter blur-[180px] ${isDark ? 'bg-blue-600 opacity-40' : 'bg-blue-400 opacity-25'}`} />
-                    <motion.div animate={{ scale: [1.2, 1, 1.2], opacity: [0.2, 0.4, 0.2], x: [0, -40, 0], y: [0, 30, 0] }} transition={{ duration: 12, repeat: Infinity, delay: 4, ease: "easeInOut" }}
-                        className={`absolute bottom-0 left-[10%] w-[500px] h-[500px] rounded-full filter blur-[150px] ${isDark ? 'bg-purple-600 opacity-35' : 'bg-purple-400 opacity-20'}`} />
+                    {/* Static orbs - no animations for performance */}
+                    <div className={`absolute top-20 right-[15%] w-[400px] h-[400px] rounded-full filter blur-[120px] ${isDark ? 'bg-blue-600 opacity-30' : 'bg-blue-400 opacity-20'}`} />
+                    <div className={`absolute bottom-0 left-[10%] w-[350px] h-[350px] rounded-full filter blur-[100px] ${isDark ? 'bg-purple-600 opacity-25' : 'bg-purple-400 opacity-15'}`} />
 
-                    {/* Grid pattern */}
-                    <motion.div animate={{ opacity: [0.02, 0.05, 0.02] }} transition={{ duration: 6, repeat: Infinity }} className="absolute inset-0"
-                        style={{ backgroundImage: `linear-gradient(${isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)'} 1px, transparent 1px), linear-gradient(90deg, ${isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)'} 1px, transparent 1px)`, backgroundSize: '80px 80px' }} />
+                    {/* Grid pattern - static */}
+                    <div className="absolute inset-0" style={{ backgroundImage: `linear-gradient(${isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)'} 1px, transparent 1px), linear-gradient(90deg, ${isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)'} 1px, transparent 1px)`, backgroundSize: '80px 80px', opacity: 0.03 }} />
 
                     <div className="relative w-full px-8 md:px-16 lg:px-24 text-center z-10">
                         <motion.div initial={{ opacity: 0, y: 20, scale: 0.9 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.6 }}

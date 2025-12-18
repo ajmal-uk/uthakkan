@@ -1,17 +1,29 @@
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
-import { useEffect, memo, Component } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useEffect, memo, Component, Suspense, lazy } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import './App.css';
 
-// Direct imports for instant navigation (pages are small enough)
+// Direct imports for light pages
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
-import Products from './pages/Products';
 import Developer from './pages/Developer';
 import Contact from './pages/Contact';
+
+// Lazy load heavy pages to prevent navigation freeze
+const Products = lazy(() => import('./pages/Products'));
+
+// Loading fallback for lazy pages
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center bg-slate-900">
+    <div className="text-center">
+      <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+      <p className="text-slate-400 text-sm">Loading...</p>
+    </div>
+  </div>
+);
 
 // Scroll to top on route change
 const ScrollToTop = memo(() => {
@@ -72,7 +84,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/services" element={<Services />} />
-              <Route path="/products" element={<Products />} />
+              <Route path="/products" element={<Suspense fallback={<PageLoader />}><Products /></Suspense>} />
               <Route path="/developer" element={<Developer />} />
               <Route path="/contact" element={<Contact />} />
             </Routes>
