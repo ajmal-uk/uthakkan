@@ -75,153 +75,90 @@ const FloatingOrbs = ({ isDark }) => (
     </div>
 );
 
-// Full width product card
+// Professional product card with minimal animations
 const ProductCard = ({ product, index, isDark }) => {
-    const [isHovered, setIsHovered] = useState(false);
-    const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
-    const cardRef = useRef(null);
-
-    const handleMouseMove = (e) => {
-        if (!cardRef.current) return;
-        const rect = cardRef.current.getBoundingClientRect();
-        setMousePos({
-            x: (e.clientX - rect.left) / rect.width,
-            y: (e.clientY - rect.top) / rect.height
-        });
-    };
-
     const Icon = product.icon;
 
     return (
         <motion.div
-            ref={cardRef}
-            initial={{ opacity: 0, y: 80 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.7, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-            onMouseMove={handleMouseMove}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
             className="group relative"
         >
-            {/* Glow effect */}
-            <motion.div
-                className={`absolute -inset-1 bg-gradient-to-r ${product.color} rounded-3xl opacity-0 group-hover:opacity-70 blur-xl transition-opacity duration-500`}
-            />
+            {/* Subtle border glow on hover */}
+            <div className={`absolute -inset-px rounded-2xl bg-gradient-to-r ${product.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
 
             {/* Card */}
-            <motion.div
-                className={`relative rounded-3xl p-8 md:p-10 border shadow-2xl transition-all duration-500 overflow-hidden h-full ${isDark
-                    ? 'bg-slate-800/80 border-slate-700/50 hover:bg-slate-800/95 backdrop-blur-xl'
-                    : 'bg-white/90 border-gray-200/50 hover:bg-white hover:shadow-3xl backdrop-blur-xl'
+            <div
+                className={`relative rounded-2xl p-8 md:p-10 overflow-hidden h-full transition-all duration-300 ${isDark
+                    ? 'bg-slate-800 group-hover:bg-slate-800/95'
+                    : 'bg-white group-hover:shadow-xl'
                     }`}
-                whileHover={{ y: -8, scale: 1.01 }}
-                style={{
-                    transform: isHovered ? `perspective(1000px) rotateX(${(mousePos.y - 0.5) * -8}deg) rotateY(${(mousePos.x - 0.5) * 8}deg)` : 'none'
-                }}
             >
-                {/* Spotlight effect */}
+                {/* Subtle corner accent */}
                 <div
-                    className="absolute inset-0 pointer-events-none transition-opacity duration-300"
-                    style={{
-                        background: isHovered
-                            ? `radial-gradient(800px circle at ${mousePos.x * 100}% ${mousePos.y * 100}%, ${isDark ? 'rgba(99, 102, 241, 0.15)' : 'rgba(99, 102, 241, 0.08)'}, transparent 40%)`
-                            : 'none',
-                        opacity: isHovered ? 1 : 0
-                    }}
-                />
-
-                {/* Top gradient glow */}
-                <motion.div
-                    className={`absolute -top-32 -right-32 w-64 h-64 bg-gradient-to-br ${product.color} rounded-full filter blur-3xl`}
-                    animate={{ opacity: isHovered ? 0.6 : 0.2 }}
-                    transition={{ duration: 0.4 }}
+                    className={`absolute -top-16 -right-16 w-40 h-40 bg-gradient-to-br ${product.color} rounded-full filter blur-3xl opacity-20 group-hover:opacity-30 transition-opacity duration-300`}
                 />
 
                 <div className="relative z-10">
                     {/* Header */}
                     <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
-                        <div className="flex items-center gap-5">
-                            <motion.div
-                                whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
-                                transition={{ duration: 0.5 }}
-                                className={`relative w-20 h-20 rounded-2xl bg-gradient-to-br ${product.color} flex items-center justify-center shadow-2xl`}
-                            >
-                                <div className={`absolute inset-0 bg-gradient-to-br ${product.color} rounded-2xl blur-xl opacity-60`} />
-                                <Icon className="relative h-10 w-10 text-white" />
-                            </motion.div>
+                        <div className="flex items-center gap-4">
+                            {/* Icon */}
+                            <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${product.color} flex items-center justify-center shadow-lg`}>
+                                <Icon className="h-8 w-8 text-white" />
+                            </div>
+
                             <div>
-                                <motion.h3
-                                    className={`text-2xl md:text-3xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}
-                                >
+                                <h3 className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
                                     {product.name}
-                                </motion.h3>
-                                <p className={`text-base ${isDark ? 'text-slate-400' : 'text-gray-500'}`}>
+                                </h3>
+                                <p className={`text-sm ${isDark ? 'text-slate-400' : 'text-gray-500'}`}>
                                     {product.tagline}
                                 </p>
                             </div>
                         </div>
-                        <motion.span
-                            className={`self-start px-4 py-1.5 bg-gradient-to-r ${product.color} text-white text-sm font-semibold rounded-full shadow-lg`}
-                            whileHover={{ scale: 1.05 }}
-                        >
+
+                        {/* Badge */}
+                        <span className={`self-start px-3 py-1.5 bg-gradient-to-r ${product.color} text-white text-xs font-semibold uppercase tracking-wide rounded-full`}>
                             {product.badge}
-                        </motion.span>
+                        </span>
                     </div>
 
                     {/* Description */}
-                    <p className={`text-base md:text-lg leading-relaxed mb-8 ${isDark ? 'text-slate-300' : 'text-gray-600'}`}>
+                    <p className={`text-base leading-relaxed mb-6 ${isDark ? 'text-slate-300' : 'text-gray-600'}`}>
                         {product.description}
                     </p>
 
                     {/* Features */}
-                    <div className="flex flex-wrap gap-3 mb-8">
+                    <div className="flex flex-wrap gap-2 mb-8">
                         {product.features.map((feature, i) => (
-                            <motion.span
+                            <span
                                 key={i}
-                                initial={{ opacity: 0, y: 10 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.2 + i * 0.08 }}
-                                whileHover={{ scale: 1.05, y: -3 }}
-                                className={`px-4 py-2 text-sm font-medium rounded-xl transition-all cursor-default ${isDark
-                                    ? 'bg-slate-700/60 text-slate-200 hover:bg-slate-700 border border-slate-600/30'
-                                    : 'bg-gray-100 text-gray-700 hover:bg-white hover:shadow-lg border border-gray-200'
+                                className={`px-3 py-1.5 text-sm font-medium rounded-lg transition-colors duration-200 ${isDark
+                                    ? 'bg-slate-700/60 text-slate-200 hover:bg-slate-700'
+                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                     }`}
                             >
                                 {feature}
-                            </motion.span>
+                            </span>
                         ))}
                     </div>
 
                     {/* CTA Button */}
-                    <motion.a
+                    <a
                         href={product.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className={`relative inline-flex items-center justify-center w-full py-4 md:py-5 px-8 bg-gradient-to-r ${product.color} text-white font-semibold text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden`}
+                        className={`flex items-center justify-center w-full py-4 px-6 bg-gradient-to-r ${product.color} text-white font-semibold text-base rounded-xl shadow-lg hover:shadow-xl hover:brightness-110 transition-all duration-200`}
                     >
-                        <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0"
-                            initial={{ x: '-100%', skewX: '-15deg' }}
-                            whileHover={{ x: '100%' }}
-                            transition={{ duration: 0.7 }}
-                        />
-                        <span className="relative z-10 flex items-center">
-                            Visit {product.name}
-                            <motion.span
-                                animate={{ x: [0, 5, 0] }}
-                                transition={{ repeat: Infinity, duration: 1.5 }}
-                                className="ml-3"
-                            >
-                                <ExternalLink className="h-5 w-5" />
-                            </motion.span>
-                        </span>
-                    </motion.a>
+                        Visit {product.name}
+                        <ExternalLink className="h-4 w-4 ml-2" />
+                    </a>
                 </div>
-            </motion.div>
+            </div>
         </motion.div>
     );
 };
