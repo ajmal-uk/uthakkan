@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
+import Sitemap from 'vite-plugin-sitemap'
 
 export default defineConfig({
   base: '/uthakkan/',
@@ -69,6 +70,18 @@ export default defineConfig({
           }
         ]
       }
+    }),
+    Sitemap({
+      hostname: 'https://ajmal-uk.github.io/',
+      dynamicRoutes: [
+        '/uthakkan/',
+        '/uthakkan/about',
+        '/uthakkan/services',
+        '/uthakkan/products',
+        '/uthakkan/developer',
+        '/uthakkan/contact'
+      ],
+      robots: [{ userAgent: '*', allow: '/' }]
     })
   ],
   build: {
