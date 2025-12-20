@@ -75,7 +75,7 @@ const MemoizedNavbar = memo(Navbar);
 function App() {
   return (
     <ErrorBoundary>
-      <Router>
+      <Router basename="/uthakkan">
         <div className="flex flex-col min-h-screen">
           <ScrollToTop />
           <MemoizedNavbar />
