@@ -52,10 +52,10 @@ const Home = () => {
     const toggleTheme = useCallback(() => setIsDark(prev => !prev), []);
 
     const features = [
-        { icon: Zap, title: "Lightning Fast", desc: "Optimized for speed", color: "from-yellow-400 to-orange-500" },
-        { icon: Shield, title: "Secure", desc: "Enterprise-grade security", color: "from-green-400 to-emerald-500" },
-        { icon: Users, title: "User-First", desc: "Designed for humans", color: "from-blue-400 to-cyan-500" },
-        { icon: TrendingUp, title: "Scalable", desc: "Grows with your needs", color: "from-purple-400 to-pink-500" }
+        { icon: Zap, title: "Lightning Fast", desc: "Optimized for performance", color: "from-yellow-400 to-orange-500" },
+        { icon: Shield, title: "Secure", desc: "Enterprise-grade security principles", color: "from-green-400 to-emerald-500" },
+        { icon: Users, title: "User-First Design", desc: "Simple, intuitive interfaces", color: "from-blue-400 to-cyan-500" },
+        { icon: TrendingUp, title: "Scalable", desc: "Designed to grow with user needs", color: "from-purple-400 to-pink-500" }
     ];
 
     const promises = [
@@ -70,7 +70,7 @@ const Home = () => {
         <>
             <SEO
                 title="UTHAKKAN - Building the Future of Digital Experiences"
-                description="UTHAKKAN is a modern technology company specializing in AI-powered tools, developer utilities, and digital experiences. Founded by Ajmal U K."
+                description="UTHAKKAN is a modern, independent software development studio founded by Ajmal U K. We blend creativity, automation, and technology to build meaningful digital products."
                 url="https://uthakkan.com/"
             />
             <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} />
@@ -87,13 +87,13 @@ const Home = () => {
                     {/* Grid pattern - static */}
                     <div className="absolute inset-0" style={{ backgroundImage: `linear-gradient(${isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)'} 1px, transparent 1px), linear-gradient(90deg, ${isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)'} 1px, transparent 1px)`, backgroundSize: '80px 80px', opacity: 0.03 }} />
 
-                    <div className="relative w-full px-8 md:px-16 lg:px-24 text-center z-10">
+                    <div className="relative w-full px-4 sm:px-8 md:px-16 lg:px-24 text-center z-10">
                         <motion.div initial={{ opacity: 0, y: 20, scale: 0.9 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.6 }}
                             className={`inline-flex items-center px-6 py-3 backdrop-blur-md rounded-full text-sm font-medium mb-10 border shadow-xl ${isDark ? 'bg-white/10 text-white/90 border-white/20' : 'bg-white/80 text-gray-700 border-gray-200'}`}>
                             <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }}>
                                 <Sparkles className={`h-4 w-4 mr-2 ${isDark ? 'text-yellow-400' : 'text-yellow-500'}`} />
                             </motion.div>
-                            Crafting Digital Excellence
+                            Utlity, Speed & Simplicity
                             <ChevronRight className="h-4 w-4 ml-1 opacity-60" />
                         </motion.div>
 
@@ -110,7 +110,7 @@ const Home = () => {
 
                         <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4 }}
                             className={`text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed mb-12 ${isDark ? 'text-slate-300' : 'text-gray-600'}`}>
-                            UTHAKKAN is a modern technology company driven by creativity and innovation. Independently built, managed, and operated by <span className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>Ajmal U K</span>.
+                            UTHAKKAN is a modern, independent software development studio founded by <span className={`font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>Ajmal U K</span>. We blend creativity, automation, and technology into meaningful digital products.
                         </motion.p>
 
                         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6 }} className="flex flex-col sm:flex-row justify-center gap-5">
@@ -137,7 +137,7 @@ const Home = () => {
 
                 {/* Features Section */}
                 <section className={`py-32 transition-colors duration-500 ${isDark ? 'bg-slate-800' : 'bg-white'}`}>
-                    <div className="w-full px-8 md:px-16 lg:px-24">
+                    <div className="w-full px-4 sm:px-8 md:px-16 lg:px-24">
                         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mb-16">
                             <motion.div initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ type: "spring" }}
                                 className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white mb-6 shadow-2xl">
@@ -169,7 +169,7 @@ const Home = () => {
                     <motion.div animate={{ x: [0, -40, 0], y: [0, 30, 0] }} transition={{ duration: 20, repeat: Infinity, delay: 5 }}
                         className={`absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full filter blur-[150px] ${isDark ? 'bg-purple-600/30' : 'bg-purple-400/20'}`} />
 
-                    <div className="relative w-full px-8 md:px-16 lg:px-24">
+                    <div className="relative w-full px-4 sm:px-8 md:px-16 lg:px-24">
                         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mb-20">
                             <h2 className={`text-4xl md:text-6xl font-bold mb-8 ${isDark ? 'text-white' : 'text-gray-900'}`}>Our Promise</h2>
                             <motion.div initial={{ width: 0 }} whileInView={{ width: 120 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="h-1.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 mx-auto rounded-full" />

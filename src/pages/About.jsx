@@ -37,7 +37,7 @@ const About = () => {
 
             <div className={`min-h-screen pt-16 overflow-hidden transition-colors duration-500 ${isDark ? 'bg-slate-900' : 'bg-gray-50'}`}>
                 {/* Hero */}
-                <section className="relative py-32 md:py-40 overflow-hidden">
+                <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
                     <div className={`absolute inset-0 transition-colors duration-500 ${isDark ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900' : 'bg-gradient-to-br from-teal-50 via-cyan-50 to-blue-50'}`} />
 
                     <motion.div animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.5, 0.3] }} transition={{ duration: 12, repeat: Infinity }}
@@ -48,51 +48,51 @@ const About = () => {
                     <motion.div animate={{ rotate: 360 }} transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
                         className={`absolute top-20 right-20 w-80 h-80 border ${isDark ? 'border-white/10' : 'border-teal-200'} rounded-full opacity-30`} />
 
-                    <div className="relative w-full px-8 md:px-16 lg:px-24 text-center z-10">
+                    <div className="relative w-full px-4 sm:px-8 md:px-16 lg:px-24 text-center z-10">
                         <motion.div initial={{ opacity: 0, y: 20, scale: 0.9 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.6 }}
-                            className={`inline-flex items-center px-5 py-2.5 backdrop-blur-md rounded-full text-sm font-medium mb-8 border shadow-lg ${isDark ? 'bg-teal-500/20 text-teal-300 border-teal-500/30' : 'bg-teal-100 text-teal-700 border-teal-200'}`}>
+                            className={`inline-flex items-center px-4 py-2 sm:px-5 sm:py-2.5 backdrop-blur-md rounded-full text-xs sm:text-sm font-medium mb-6 sm:mb-8 border shadow-lg ${isDark ? 'bg-teal-500/20 text-teal-300 border-teal-500/30' : 'bg-teal-100 text-teal-700 border-teal-200'}`}>
                             <Heart className="h-4 w-4 mr-2" />
                             About Us
                             <ChevronRight className="h-4 w-4 ml-1 opacity-60" />
                         </motion.div>
 
                         <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }}
-                            className={`text-6xl md:text-8xl font-bold tracking-tight leading-none mb-8 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                            className={`text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold tracking-tight leading-tight sm:leading-none mb-6 sm:mb-8 ${isDark ? 'text-white' : 'text-gray-900'}`}>
                             Meet{' '}
                             <span className="bg-gradient-to-r from-teal-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">UTHAKKAN</span>
                         </motion.h1>
 
                         <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4 }}
-                            className={`text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed ${isDark ? 'text-slate-300' : 'text-gray-600'}`}>
+                            className={`text-base sm:text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto leading-relaxed px-2 ${isDark ? 'text-slate-300' : 'text-gray-600'}`}>
                             An independent technology company focused on building tools that matter for the digital age.
                         </motion.p>
                     </div>
                 </section>
 
                 {/* Mission & Vision */}
-                <section className={`py-24 transition-colors duration-500 ${isDark ? 'bg-slate-800' : 'bg-white'}`}>
-                    <div className="w-full px-8 md:px-16 lg:px-24">
-                        <div className="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto">
+                <section className={`min-h-screen flex flex-col justify-center py-24 transition-colors duration-500 ${isDark ? 'bg-slate-800' : 'bg-white'}`}>
+                    <div className="w-full px-4 sm:px-8 md:px-16 lg:px-24">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10">
                             <motion.div initial={{ opacity: 0, x: -60 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} whileHover={{ y: -8 }}
-                                className="bg-gradient-to-br from-teal-500 to-cyan-600 p-10 rounded-3xl text-white shadow-2xl relative overflow-hidden">
+                                className="bg-gradient-to-br from-teal-500 to-cyan-600 p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl text-white shadow-2xl relative overflow-hidden">
                                 <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full blur-3xl -mr-24 -mt-24" />
-                                <motion.div className="relative bg-white/20 w-16 h-16 rounded-2xl flex items-center justify-center mb-8 backdrop-blur-sm" whileHover={{ rotate: [0, -10, 10, 0] }}>
-                                    <Target className="h-8 w-8 text-white" />
+                                <motion.div className="relative bg-white/20 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center mb-5 sm:mb-6 md:mb-8 backdrop-blur-sm" whileHover={{ rotate: [0, -10, 10, 0] }}>
+                                    <Target className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-white" />
                                 </motion.div>
-                                <h2 className="text-3xl font-bold mb-6 text-white">Our Mission</h2>
-                                <p className="text-teal-50 text-lg leading-relaxed">
+                                <h2 className="text-2xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-5 md:mb-6 text-white">Our Mission</h2>
+                                <p className="text-teal-50 text-sm sm:text-base md:text-lg leading-relaxed">
                                     To merge creativity with technology — delivering clean, efficient, and impactful digital products that simplify work, enhance productivity, and inspire innovation.
                                 </p>
                             </motion.div>
 
                             <motion.div initial={{ opacity: 0, x: 60 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} whileHover={{ y: -8 }}
-                                className="bg-gradient-to-br from-purple-500 to-indigo-600 p-10 rounded-3xl text-white shadow-2xl relative overflow-hidden">
+                                className="bg-gradient-to-br from-purple-500 to-indigo-600 p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl text-white shadow-2xl relative overflow-hidden">
                                 <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full blur-3xl -mr-24 -mt-24" />
-                                <motion.div className="relative bg-white/20 w-16 h-16 rounded-2xl flex items-center justify-center mb-8 backdrop-blur-sm" whileHover={{ rotate: [0, -10, 10, 0] }}>
-                                    <Eye className="h-8 w-8 text-white" />
+                                <motion.div className="relative bg-white/20 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center mb-5 sm:mb-6 md:mb-8 backdrop-blur-sm" whileHover={{ rotate: [0, -10, 10, 0] }}>
+                                    <Eye className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-white" />
                                 </motion.div>
-                                <h2 className="text-3xl font-bold mb-6 text-white">Our Vision</h2>
-                                <p className="text-purple-50 text-lg leading-relaxed">
+                                <h2 className="text-2xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-5 md:mb-6 text-white">Our Vision</h2>
+                                <p className="text-purple-50 text-sm sm:text-base md:text-lg leading-relaxed">
                                     To innovate across AI, development, and design — shaping technology that inspires creativity and drives meaningful digital growth.
                                 </p>
                             </motion.div>
@@ -101,23 +101,26 @@ const About = () => {
                 </section>
 
                 {/* Company Details */}
-                <section className={`py-24 transition-colors duration-500 ${isDark ? 'bg-slate-900' : 'bg-gray-50'}`}>
-                    <div className="w-full px-8 md:px-16 lg:px-24">
+                <section className={`min-h-screen flex flex-col justify-center py-24 transition-colors duration-500 ${isDark ? 'bg-slate-900' : 'bg-gray-50'}`}>
+                    <div className="w-full px-4 sm:px-8 md:px-16 lg:px-24">
                         <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
-                            className={`max-w-5xl mx-auto rounded-3xl shadow-2xl overflow-hidden border ${isDark ? 'bg-slate-800 border-slate-700' : 'bg-white border-gray-100'}`}>
-                            <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-10">
-                                <h2 className="text-3xl font-bold text-white">Company Details</h2>
+                            className={`rounded-3xl shadow-2xl overflow-hidden border ${isDark ? 'bg-slate-800 border-slate-700' : 'bg-white border-gray-100'}`}>
+                            <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 sm:p-8 md:p-10">
+                                <h2 className="text-2xl sm:text-2xl md:text-3xl font-bold text-white">Company Overview</h2>
+                                <p className="text-slate-300 mt-3 sm:mt-4 leading-relaxed text-sm sm:text-base">
+                                    UTHAKKAN is a modern, independent software development and digital innovation studio founded in 2025 by Ajmal U K. The company blends creativity, automation, and technology into meaningful digital products that solve real-world problems.
+                                </p>
                             </div>
-                            <div className="p-10">
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
+                            <div className="p-6 sm:p-8 md:p-10">
+                                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 md:gap-10">
                                     {companyDetails.map((item, i) => (
                                         <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} whileHover={{ y: -5 }} className="text-center group">
-                                            <motion.div className={`w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center transition-all ${isDark ? 'bg-slate-700 group-hover:bg-slate-600' : 'bg-gray-100 group-hover:bg-gray-200'}`}
+                                            <motion.div className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto mb-3 sm:mb-4 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all ${isDark ? 'bg-slate-700 group-hover:bg-slate-600' : 'bg-gray-100 group-hover:bg-gray-200'}`}
                                                 whileHover={{ rotate: [0, -5, 5, 0] }}>
-                                                <item.icon className={`h-7 w-7 ${isDark ? 'text-slate-300' : 'text-gray-600'}`} />
+                                                <item.icon className={`h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 ${isDark ? 'text-slate-300' : 'text-gray-600'}`} />
                                             </motion.div>
-                                            <span className={`text-sm block mb-2 ${isDark ? 'text-slate-500' : 'text-gray-500'}`}>{item.label}</span>
-                                            <p className={`font-bold text-lg ${isDark ? 'text-white' : 'text-gray-900'}`}>{item.value}</p>
+                                            <span className={`text-xs sm:text-sm block mb-1 sm:mb-2 ${isDark ? 'text-slate-500' : 'text-gray-500'}`}>{item.label}</span>
+                                            <p className={`font-bold text-sm sm:text-base md:text-lg ${isDark ? 'text-white' : 'text-gray-900'}`}>{item.value}</p>
                                         </motion.div>
                                     ))}
                                 </div>

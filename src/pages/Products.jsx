@@ -180,45 +180,45 @@ const Products = () => {
         {
             id: 'byte-ai',
             name: 'Byte AI',
-            tagline: 'Your Intelligent AI Companion',
-            description: 'A powerful AI chatbot similar to Gemini and ChatGPT. Experience natural conversations, get instant answers, generate creative content, and solve complex problems with cutting-edge artificial intelligence.',
+            tagline: 'Intelligent AI Assistance',
+            description: 'An AI-powered platform focused on intelligent assistance, automation, and productivity enhancement. Experience natural conversations and smart problem solving.',
             icon: Bot,
             color: 'from-violet-500 to-purple-600',
             url: 'https://byteai.pythonanywhere.com',
-            features: ['Natural Conversations', 'Code Generation', 'Creative Writing', 'Problem Solving'],
+            features: ['Intelligent Assistance', 'Automation', 'Productivity', 'Smart Workflows'],
             badge: 'AI Powered'
         },
         {
             id: 'toolpix',
             name: 'ToolPix',
-            tagline: 'Your Ultimate Tool Studio',
-            description: 'A comprehensive tool studio featuring digital tools, assets, utilities, AI-powered features, and online compilers. Everything you need for creative and technical work in one place.',
+            tagline: 'Practical Digital Tools',
+            description: 'A collection of practical online tools designed to help users solve everyday digital problems quickly and efficiently. Your studio for digital assets and utilities.',
             icon: Wrench,
             color: 'from-emerald-500 to-teal-600',
             url: 'https://toolpix.pythonanywhere.com',
-            features: ['Digital Assets', 'AI Tools', 'Online Compilers', 'Utility Apps'],
-            badge: 'All-in-One'
+            features: ['Digital Tools', 'Quick Solutions', 'Everyday Utilities', 'Efficiency'],
+            badge: 'Utility'
         },
         {
             id: 'zymail',
             name: 'Zymail',
-            tagline: 'Instant Temporary Emails',
-            description: 'Generate disposable email addresses instantly. Protect your privacy, avoid spam, and keep your real inbox clean with our secure temporary email service.',
+            tagline: 'Lightweight Email Utility',
+            description: 'A lightweight email-related utility platform focused on productivity and simplicity. Generate temporary emails and manage your digital communication efficiently.',
             icon: Mail,
             color: 'from-blue-500 to-cyan-600',
             url: 'https://zymail.pythonanywhere.com',
-            features: ['Instant Generation', 'Spam Protection', 'Privacy First', 'No Sign-up'],
+            features: ['Productivity', 'Simplicity', 'Email Tools', 'Privacy Focused'],
             badge: 'Privacy'
         },
         {
             id: 'zyrace',
             name: 'Zyrace',
-            tagline: 'Thrilling Online Racing',
-            description: 'An exhilarating online car racing game. Experience high-speed action, compete with players worldwide, and race your way to the top of the leaderboards.',
+            tagline: 'Experimental Racing Platform',
+            description: 'An experimental platform exploring performance, automation, and smart workflows through an exhilarating online racing experience.',
             icon: Car,
             color: 'from-orange-500 to-red-600',
             url: 'https://zyrace.pythonanywhere.com',
-            features: ['Multiplayer Racing', 'Custom Cars', 'Global Leaderboards', 'Exciting Tracks'],
+            features: ['Performance', 'Automation', 'Smart Workflows', 'Experimental'],
             badge: 'Gaming'
         }
     ];
@@ -310,7 +310,7 @@ const Products = () => {
                     />
 
                     {/* Content - Full Width */}
-                    <div className="relative w-full px-8 md:px-16 lg:px-24 text-center z-10">
+                    <div className="relative w-full px-4 sm:px-8 md:px-16 lg:px-24 text-center z-10">
                         <motion.div
                             initial={{ opacity: 0, y: 20, scale: 0.9 }}
                             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -404,7 +404,7 @@ const Products = () => {
                     ? 'bg-gradient-to-b from-slate-800 via-slate-900 to-slate-800'
                     : 'bg-gradient-to-b from-white via-gray-50 to-white'
                     }`}>
-                    <div className="w-full px-8 md:px-16 lg:px-24 relative z-10">
+                    <div className="w-full px-4 sm:px-8 md:px-16 lg:px-24 relative z-10">
                         {/* Section header */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -442,7 +442,7 @@ const Products = () => {
                     ? 'bg-slate-900'
                     : 'bg-white'
                     }`}>
-                    <div className="w-full px-8 md:px-16 lg:px-24">
+                    <div className="w-full px-4 sm:px-8 md:px-16 lg:px-24">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -511,7 +511,7 @@ const Products = () => {
                             }`}
                     />
 
-                    <div className="relative w-full px-8 md:px-16 lg:px-24">
+                    <div className="relative w-full px-4 sm:px-8 md:px-16 lg:px-24">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -571,7 +571,7 @@ const Products = () => {
                     <motion.div animate={{ rotate: 360 }} transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
                         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-white/10 rounded-full" />
 
-                    <div className="relative w-full px-8 md:px-16 lg:px-24 text-center z-10">
+                    <div className="relative w-full px-4 sm:px-8 md:px-16 lg:px-24 text-center z-10">
                         <motion.div
                             initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}

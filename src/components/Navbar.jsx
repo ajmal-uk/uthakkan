@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Rocket, Menu, X, Home, Info, Briefcase, Package, User, Mail, ArrowUpRight, Sparkles } from 'lucide-react';
+import { Rocket, Menu, X, Home, Info, Briefcase, Package, User, Mail, ArrowUpRight, Sparkles, DollarSign } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
@@ -38,6 +38,7 @@ const Navbar = () => {
         { path: '/about', label: 'About', icon: Info },
         { path: '/services', label: 'Services', icon: Briefcase },
         { path: '/products', label: 'Products', icon: Package },
+        { path: '/freelancing', label: 'Hire Me', icon: DollarSign },
         { path: '/developer', label: 'Developer', icon: User },
         { path: '/contact', label: 'Contact', icon: Mail },
     ];
@@ -74,7 +75,7 @@ const Navbar = () => {
                         {/* Desktop Navigation */}
                         <div className="hidden lg:flex items-center">
                             <div className="flex items-center bg-gray-100/80 backdrop-blur-sm rounded-2xl p-1.5 border border-gray-200/50">
-                                {navLinks.slice(0, 5).map((link) => (
+                                {navLinks.slice(0, 6).map((link) => (
                                     <Link
                                         key={link.path}
                                         to={link.path}

@@ -11,6 +11,19 @@ import About from './pages/About';
 import Services from './pages/Services';
 import Developer from './pages/Developer';
 import Contact from './pages/Contact';
+import Freelancing from './pages/Freelancing';
+
+// Legal pages
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import Terms from './pages/Terms';
+import CookiePolicy from './pages/CookiePolicy';
+
+// Content & Business pages
+import Blog from './pages/Blog';
+import News from './pages/News';
+import Documentation from './pages/Documentation';
+import Promotions from './pages/Promotions';
+import FAQ from './pages/FAQ';
 
 // Lazy load heavy pages to prevent navigation freeze
 const Products = lazy(() => import('./pages/Products'));
@@ -75,7 +88,7 @@ const MemoizedNavbar = memo(Navbar);
 function App() {
   return (
     <ErrorBoundary>
-      <Router basename="/uthakkan">
+      <Router>
         <div className="flex flex-col min-h-screen">
           <ScrollToTop />
           <MemoizedNavbar />
@@ -87,6 +100,17 @@ function App() {
               <Route path="/products" element={<Suspense fallback={<PageLoader />}><Products /></Suspense>} />
               <Route path="/developer" element={<Developer />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/freelancing" element={<Freelancing />} />
+              {/* Legal Pages */}
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/cookies" element={<CookiePolicy />} />
+              {/* Content & Business Pages */}
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/news" element={<News />} />
+              <Route path="/docs" element={<Documentation />} />
+              <Route path="/promotions" element={<Promotions />} />
+              <Route path="/faq" element={<FAQ />} />
             </Routes>
           </main>
           <MemoizedFooter />

@@ -20,12 +20,12 @@ const Services = () => {
     const toggleTheme = useCallback(() => setIsDark(prev => !prev), []);
 
     const services = [
-        { icon: Brain, title: "AI-based Web Applications", desc: "Intelligent chat systems, AI assistants, and automation tools powered by cutting-edge machine learning and natural language processing.", color: "from-blue-500 to-indigo-600" },
-        { icon: Code, title: "Developer Tools", desc: "Powerful utilities, productivity applications, and development workflows designed to streamline coding and boost efficiency.", color: "from-emerald-500 to-teal-600" },
-        { icon: Gamepad2, title: "Interactive Games", desc: "Fun, accessible, and engaging web games built with modern technologies for entertainment and learning.", color: "from-pink-500 to-rose-600" },
-        { icon: Monitor, title: "Web Experiences", desc: "Creative, interactive, and responsive web designs that captivate users and deliver exceptional digital experiences.", color: "from-purple-500 to-violet-600" },
-        { icon: Layers, title: "SaaS Products", desc: "Lightweight, scalable software-as-a-service solutions for modern businesses, startups, and entrepreneurs.", color: "from-amber-500 to-orange-600" },
-        { icon: Globe, title: "Custom Solutions", desc: "Tailored digital solutions including API integrations, freelance development, and bespoke software projects.", color: "from-cyan-500 to-blue-600" }
+        { icon: Code, title: "Software & Web Development", desc: "Custom websites, web apps, frontend & backend development, and performance optimization.", color: "from-blue-500 to-indigo-600" },
+        { icon: Monitor, title: "Video Editing & Content", desc: "YouTube video editing, short-form content (Reels/Shorts), and tech workflow visualization.", color: "from-pink-500 to-rose-600" },
+        { icon: Brain, title: "Automation & AI Solutions", desc: "Task automation, AI-powered tools for creators, and business workflow optimization.", color: "from-emerald-500 to-teal-600" },
+        { icon: Sparkles, title: "Digital Consulting", desc: "Productivity system setup, tool selection, optimization, and creator-focused tech consulting.", color: "from-amber-500 to-orange-600" },
+        { icon: Globe, title: "YouTube & Content Ecosystem", desc: "Educational content across productivity, gaming, tech tutorials, and AI automation.", color: "from-purple-500 to-violet-600" },
+        { icon: Layers, title: "SaaS & Product Building", desc: "Developing lightweight, scalable software-as-a-service solutions for modern needs.", color: "from-cyan-500 to-blue-600" }
     ];
 
     const tags = ['AI Tools', 'Developer Utilities', 'Web Apps', 'Automation', 'Chatbots', 'SaaS', 'Web Design', 'API Integration', 'Frontend Development', 'Cloud-Based Tools'];
@@ -54,7 +54,7 @@ const Services = () => {
 
             <div className={`min-h-screen pt-16 overflow-hidden transition-colors duration-500 ${isDark ? 'bg-slate-900' : 'bg-gray-50'}`}>
                 {/* Hero */}
-                <section className="relative py-32 md:py-40 overflow-hidden">
+                <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
                     <div className={`absolute inset-0 transition-colors duration-500 ${isDark ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900' : 'bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50'}`} />
 
                     <motion.div animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.5, 0.3] }} transition={{ duration: 12, repeat: Infinity }}
@@ -65,7 +65,7 @@ const Services = () => {
                     <motion.div animate={{ rotate: [12, 25, 12] }} transition={{ duration: 8, repeat: Infinity }}
                         className={`absolute top-32 right-32 w-40 h-40 rounded-3xl opacity-20 ${isDark ? 'bg-gradient-to-br from-orange-500 to-amber-500' : 'bg-gradient-to-br from-orange-400 to-amber-500'}`} />
 
-                    <div className="relative w-full px-8 md:px-16 lg:px-24 text-center z-10">
+                    <div className="relative w-full px-4 sm:px-8 md:px-16 lg:px-24 text-center z-10">
                         <motion.div initial={{ opacity: 0, y: 20, scale: 0.9 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.6 }}
                             className={`inline-flex items-center px-5 py-2.5 backdrop-blur-md rounded-full text-sm font-medium mb-8 border shadow-lg ${isDark ? 'bg-orange-500/20 text-orange-300 border-orange-500/30' : 'bg-orange-100 text-orange-700 border-orange-200'}`}>
                             <Sparkles className="h-4 w-4 mr-2" />
@@ -87,8 +87,8 @@ const Services = () => {
                 </section>
 
                 {/* Services Grid */}
-                <section className={`py-24 transition-colors duration-500 ${isDark ? 'bg-slate-800' : 'bg-white'}`}>
-                    <div className="w-full px-8 md:px-16 lg:px-24">
+                <section className={`min-h-screen flex flex-col justify-center py-24 transition-colors duration-500 ${isDark ? 'bg-slate-800' : 'bg-white'}`}>
+                    <div className="w-full px-4 sm:px-8 md:px-16 lg:px-24">
                         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                             {services.map((service, index) => (
                                 <motion.div key={index} initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: index * 0.1 }} whileHover={{ y: -10, scale: 1.02 }}
@@ -113,10 +113,10 @@ const Services = () => {
                 </section>
 
                 {/* Specialties */}
-                <section className={`py-24 transition-colors duration-500 ${isDark ? 'bg-slate-900' : 'bg-gray-50'}`}>
-                    <div className="w-full px-8 md:px-16 lg:px-24">
+                <section className={`min-h-screen flex flex-col justify-center py-24 transition-colors duration-500 ${isDark ? 'bg-slate-900' : 'bg-gray-50'}`}>
+                    <div className="w-full px-4 sm:px-8 md:px-16 lg:px-24">
                         <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
-                            className="max-w-5xl mx-auto bg-gradient-to-r from-gray-900 to-gray-800 rounded-3xl p-12 text-center shadow-2xl relative overflow-hidden">
+                            className="bg-gradient-to-r from-gray-900 to-gray-800 rounded-3xl p-12 text-center shadow-2xl relative overflow-hidden">
                             <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-orange-500/20 to-amber-500/20 rounded-full blur-3xl -mr-32 -mt-32" />
 
                             <h2 className="text-3xl font-bold text-white mb-10">Our Specialties</h2>

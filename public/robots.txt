@@ -1,0 +1,26 @@
+# UTHAKKAN robots.txt
+# https://uthakkan.com
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://uthakkan.com/sitemap.xml
+
+# Crawl-delay (optional, for polite crawling)
+Crawl-delay: 1
+
+# Block common spam bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+# Block unnecessary paths
+Disallow: /api/
+Disallow: /*.json$
+Disallow: /src/

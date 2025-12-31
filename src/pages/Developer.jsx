@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Github, Linkedin, Code2, Sparkles, Coffee, Sun, Moon, ChevronRight } from 'lucide-react';
 import { useState, useCallback } from 'react';
 import SEO from '../components/SEO';
+import ceoImage from '../assets/ceo.png';
 
 // Theme toggle
 const ThemeToggle = ({ isDark, toggleTheme }) => (
@@ -21,18 +22,46 @@ const Developer = () => {
 
     const skills = ['React', 'Python', 'JavaScript', 'AI/ML', 'Node.js', 'Flask', 'Tailwind CSS', 'Firebase', 'Git', 'Vite'];
 
+    const personSchema = {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Ajmal U K",
+        "jobTitle": "Founder & Developer",
+        "description": "MCA student and full-stack developer passionate about AI-driven tools and digital experiences.",
+        "url": "https://uthakkan.com/developer",
+        "image": "https://uthakkan.com/ceo.png",
+        "sameAs": [
+            "https://github.com/ajmal-uk",
+            "https://linkedin.com/in/ajmaluk",
+            "https://x.com/ajmal_uk_"
+        ],
+        "worksFor": {
+            "@type": "Organization",
+            "name": "UTHAKKAN",
+            "url": "https://uthakkan.com"
+        },
+        "knowsAbout": ["Web Development", "React", "Python", "AI", "Video Editing", "SaaS Development"],
+        "alumniOf": {
+            "@type": "EducationalOrganization",
+            "name": "MCA Program"
+        }
+    };
+
     return (
         <>
             <SEO
-                title="Ajmal U K - Founder & Developer of UTHAKKAN"
-                description="Meet Ajmal U K, the visionary developer behind UTHAKKAN. MCA student passionate about AI-driven tools and digital experiences."
+                title="Ajmal U K - Founder & Full-Stack Developer | UTHAKKAN"
+                description="Meet Ajmal U K, the founder and developer behind UTHAKKAN. MCA student specializing in React, Python, AI tools, and digital experiences. Based in Kannur, Kerala, India."
+                keywords="Ajmal U K, UTHAKKAN founder, full-stack developer Kerala, React developer India, Python developer, AI developer, MCA student developer, web developer Kannur, freelance developer India"
                 url="https://uthakkan.com/developer"
+                type="profile"
+                schema={personSchema}
             />
             <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} />
 
             <div className={`min-h-screen pt-16 overflow-hidden transition-colors duration-500 ${isDark ? 'bg-slate-900' : 'bg-gray-50'}`}>
                 {/* Hero */}
-                <section className="relative py-32 md:py-40 overflow-hidden">
+                <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
                     <div className={`absolute inset-0 transition-colors duration-500 ${isDark ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900' : 'bg-gradient-to-br from-violet-50 via-purple-50 to-fuchsia-50'}`} />
 
                     <motion.div animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.5, 0.3] }} transition={{ duration: 12, repeat: Infinity }}
@@ -43,7 +72,7 @@ const Developer = () => {
                     <motion.div animate={{ y: [0, -15, 0] }} transition={{ duration: 5, repeat: Infinity }} className="absolute top-32 left-32 text-7xl opacity-30">👨‍💻</motion.div>
                     <motion.div animate={{ y: [0, 15, 0] }} transition={{ duration: 6, repeat: Infinity, delay: 1 }} className="absolute bottom-20 right-32 text-6xl opacity-20">🚀</motion.div>
 
-                    <div className="relative w-full px-8 md:px-16 lg:px-24 text-center z-10">
+                    <div className="relative w-full px-4 sm:px-8 md:px-16 lg:px-24 text-center z-10">
                         <motion.div initial={{ opacity: 0, y: 20, scale: 0.9 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.6 }}
                             className={`inline-flex items-center px-5 py-2.5 backdrop-blur-md rounded-full text-sm font-medium mb-8 border shadow-lg ${isDark ? 'bg-violet-500/20 text-violet-300 border-violet-500/30' : 'bg-violet-100 text-violet-700 border-violet-200'}`}>
                             <Sparkles className="h-4 w-4 mr-2" />
@@ -60,9 +89,9 @@ const Developer = () => {
                 </section>
 
                 {/* Profile Card */}
-                <section className={`py-12 transition-colors duration-500 ${isDark ? 'bg-slate-800' : 'bg-white'}`}>
-                    <div className="w-full px-8 md:px-16 lg:px-24">
-                        <motion.div initial={{ opacity: 0, y: 60 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, type: "spring" }} className="relative max-w-5xl mx-auto">
+                <section className={`min-h-screen flex flex-col justify-center py-12 transition-colors duration-500 ${isDark ? 'bg-slate-800' : 'bg-white'}`}>
+                    <div className="w-full px-4 sm:px-8 md:px-16 lg:px-24">
+                        <motion.div initial={{ opacity: 0, y: 60 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, type: "spring" }} className="relative">
                             <div className="absolute -inset-4 bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 rounded-[2.5rem] blur-lg opacity-30" />
 
                             <div className="relative bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700 rounded-3xl p-10 md:p-14 text-white shadow-2xl overflow-hidden">
@@ -78,7 +107,7 @@ const Developer = () => {
                                             </span>
                                             <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white">Ajmal U K</h2>
                                             <p className="text-violet-100 text-lg md:text-xl leading-relaxed mb-10">
-                                                Visionary Developer, Founder of UTHAKKAN & MCA Student. Passionate about building AI-driven tools, lightweight web applications, and creative digital utilities. Single-handedly designs, develops, and deploys all UTHAKKAN products.
+                                                Founder, Developer, and Content Creator. Ajmal brings together development, design thinking, and content creation to build tools and platforms that are simple to use, efficient, and impactful. An Automation & AI enthusiast dedicated to building the future of digital experiences.
                                             </p>
 
                                             <div className="flex flex-wrap gap-4">
@@ -103,7 +132,7 @@ const Developer = () => {
 
                                     <div className="hidden md:flex justify-center">
                                         <motion.div initial={{ scale: 0, rotate: -180 }} animate={{ scale: 1, rotate: 0 }} transition={{ duration: 0.8, delay: 0.5, type: "spring", bounce: 0.4 }} whileHover={{ scale: 1.08, rotate: 5 }} className="relative">
-                                            <div className="w-48 h-48 bg-gradient-to-br from-white/30 to-white/10 rounded-full border-4 border-white/40 flex items-center justify-center text-8xl font-bold backdrop-blur-md shadow-2xl text-white">A</div>
+                                            <img src={ceoImage} alt="Ajmal U K" className="w-48 h-48 rounded-full border-4 border-white/40 object-cover shadow-2xl" />
                                             <motion.div animate={{ rotate: 360 }} transition={{ duration: 25, repeat: Infinity, ease: "linear" }} className="absolute -inset-6 border-2 border-dashed border-white/30 rounded-full" />
                                         </motion.div>
                                     </div>
@@ -114,13 +143,13 @@ const Developer = () => {
                 </section>
 
                 {/* Skills */}
-                <section className={`py-24 transition-colors duration-500 ${isDark ? 'bg-slate-900' : 'bg-gray-50'}`}>
-                    <div className="w-full px-8 md:px-16 lg:px-24">
+                <section className={`min-h-screen flex flex-col justify-center py-24 transition-colors duration-500 ${isDark ? 'bg-slate-900' : 'bg-gray-50'}`}>
+                    <div className="w-full px-4 sm:px-8 md:px-16 lg:px-24">
                         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mb-12">
                             <h3 className={`text-3xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>Skills & Technologies</h3>
                             <motion.div initial={{ width: 0 }} whileInView={{ width: 100 }} viewport={{ once: true }} className="h-1 bg-gradient-to-r from-violet-500 to-purple-500 mx-auto mt-4 rounded-full" />
                         </motion.div>
-                        <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
+                        <div className="flex flex-wrap justify-center gap-4">
                             {skills.map((skill, i) => (
                                 <motion.span key={skill} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }} whileHover={{ scale: 1.1, y: -5 }}
                                     className={`px-6 py-3 rounded-xl text-base font-medium transition-all cursor-default shadow-lg ${isDark ? 'bg-slate-800 text-slate-200 hover:bg-violet-600 hover:text-white border border-slate-700' : 'bg-white text-gray-700 hover:bg-violet-100 hover:text-violet-700 border border-gray-200'}`}>

@@ -4,7 +4,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 import Sitemap from 'vite-plugin-sitemap'
 
 export default defineConfig({
-  base: '/uthakkan/',
+  base: '/',
   plugins: [
     react(),
     VitePWA({

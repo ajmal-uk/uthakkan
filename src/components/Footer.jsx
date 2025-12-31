@@ -16,8 +16,22 @@ const Footer = () => {
         { name: 'About', path: '/about' },
         { name: 'Services', path: '/services' },
         { name: 'Products', path: '/products' },
-        { name: 'Developer', path: '/developer' },
+        { name: 'Hire Me', path: '/freelancing' },
         { name: 'Contact', path: '/contact' }
+    ];
+
+    const resources = [
+        { name: 'Blog', path: '/blog' },
+        { name: 'News', path: '/news' },
+        { name: 'Documentation', path: '/docs' },
+        { name: 'FAQ', path: '/faq' },
+        { name: 'Promotions', path: '/promotions' }
+    ];
+
+    const legal = [
+        { name: 'Privacy Policy', path: '/privacy' },
+        { name: 'Terms of Service', path: '/terms' },
+        { name: 'Cookie Policy', path: '/cookies' }
     ];
 
     const socials = [
@@ -81,8 +95,42 @@ const Footer = () => {
                             </ul>
                         </div>
 
+                        {/* Resources */}
+                        <div className="lg:col-span-2">
+                            <h4 className="font-semibold text-sm text-slate-200 mb-4">Resources</h4>
+                            <ul className="space-y-2.5">
+                                {resources.map((link, i) => (
+                                    <li key={i}>
+                                        <Link
+                                            to={link.path}
+                                            className="text-slate-400 hover:text-white text-sm transition-colors duration-200"
+                                        >
+                                            {link.name}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        {/* Legal */}
+                        <div className="lg:col-span-2">
+                            <h4 className="font-semibold text-sm text-slate-200 mb-4">Legal</h4>
+                            <ul className="space-y-2.5">
+                                {legal.map((link, i) => (
+                                    <li key={i}>
+                                        <Link
+                                            to={link.path}
+                                            className="text-slate-400 hover:text-white text-sm transition-colors duration-200"
+                                        >
+                                            {link.name}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
                         {/* Products */}
-                        <div className="lg:col-span-3">
+                        <div className="lg:col-span-2">
                             <h4 className="font-semibold text-sm text-slate-200 mb-4">Products</h4>
                             <ul className="space-y-2.5">
                                 {products.map((product, i) => (
@@ -137,9 +185,10 @@ const Footer = () => {
                                 <span>in India</span>
                             </div>
 
-                            <div className="flex items-center gap-6">
-                                <Link to="/privacy" className="hover:text-slate-300 transition-colors duration-200">Privacy Policy</Link>
-                                <Link to="/terms" className="hover:text-slate-300 transition-colors duration-200">Terms of Service</Link>
+                            <div className="flex items-center gap-4 sm:gap-6 flex-wrap justify-center md:justify-end">
+                                <Link to="/privacy" className="hover:text-slate-300 transition-colors duration-200">Privacy</Link>
+                                <Link to="/terms" className="hover:text-slate-300 transition-colors duration-200">Terms</Link>
+                                <Link to="/cookies" className="hover:text-slate-300 transition-colors duration-200">Cookies</Link>
                             </div>
                         </div>
                     </div>
